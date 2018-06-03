@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1528045514 source:c:\users\radu\documents\github\shortestpath\shortest path man\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+
