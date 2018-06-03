@@ -48,7 +48,85 @@ int is_marked(int v, int marked_vertices[], int marked_vertices_idx) {
 	return 0;
 }
 
-void dijkstra(struct a_graph *graph, int src, int dest) {
+void push_begining_list(struct a_list_node *head, int new_element_value){
+    struct a_list_node *next_element;
+    struct a_list_node *new_element;
+
+    next_element = head->next;
+    new_element = malloc(sizeof(struct a_list_node));
+    new_element->info = new_element_value;
+    new_element->next = head->next;
+    head->next = new_element;
+}
+
+int pop_end_list(struct a_list_node *head) {
+    struct a_list_node *deleted_element;
+    struct a_list_node *iterator;
+    int aux;
+
+    if (head->next != NULL) {
+        for (iterator = head; iterator->next->next != NULL; iterator = iterator->next);
+        deleted_element = iterator->next;
+        aux = deleted_element->info;
+        iterator->next = deleted_element->next;
+        free(deleted_element);
+        return aux;
+    } else {
+        printf("\n The list is empty");
+        return -1; //the list is empty
+    }
+}
+
+int graph_bfs(struct a_graph *graph, int start_node, int dest_node){
+    struct a_list_node *head_queue;
+    int *visited;
+    int aux;
+    int current_node;
+    int connect;
+    int i;
+
+    connect = get_adj_matrix_value(graph, start_node, dest_node);
+
+    set_adj_matrix_value(graph, start_node, dest_node, 0);
+    set_adj_matrix_value(graph, dest_node, start_node, 0);
+
+    head_queue = calloc(1, sizeof(struct a_list_node));
+    head_queue->next = NULL;
+    head_queue->info = 0; //no of elements in the queue
+    visited = calloc((graph->no_nodes), sizeof(int));
+    push_begining_list(head_queue, start_node);
+    visited[start_node] = 1;
+
+    printf("\nBFS traversal: ");
+    while (head_queue->next != NULL){
+        current_node = pop_end_list(head_queue);
+        printf("%d,",current_node);
+        for(i = 0; i < graph->no_nodes; i++){
+            aux = get_adj_matrix_value(graph, current_node, i);
+            if ( (aux != 0) && ( (visited[i]) == 0 )){
+                push_begining_list(head_queue, i);
+                visited[i] = 1;
+            }
+        }
+    }
+
+    for(i = 0; i < graph->no_nodes; i++){
+        if( visited[i] == 0){
+            set_adj_matrix_value(graph, start_node, dest_node, connect);
+            set_adj_matrix_value(graph, dest_node, start_node, connect);
+            free(head_queue);
+            free(visited);
+            return 0;
+        }
+    }
+    set_adj_matrix_value(graph, start_node, dest_node, connect);
+    set_adj_matrix_value(graph, dest_node, start_node, connect);
+    free(head_queue);
+    free(visited);
+    return 1;
+}
+
+void dijkstra(struct a_graph *graph, int start, int dest) {
 
     printf("asd");
     int v;
@@ -69,7 +147,7 @@ void dijkstra(struct a_graph *graph, int src, int dest) {
     marked_value = 0;
     wt_table_r = 0;
     marked_vertices_idx = 0;
-    v=graph->no_nodes;
+    v = graph->no_nodes;
 
 	int shortest_path_vertices[v] ;
 	memset(shortest_path_vertices, 0, v*sizeof(int) );
@@ -82,13 +160,13 @@ void dijkstra(struct a_graph *graph, int src, int dest) {
 			weight_table[r][c] = INF;
 		}
 	}
-	weight_table[wt_table_r++][src] = 0;
+	weight_table[wt_table_r++][start] = 0;
 
 
 	int marked_vertices[v] ;
 	memset( marked_vertices, 0, v*sizeof(int) );
-	marked_vertices[marked_vertices_idx++] = src;
-	curr_vertex = src;
+	marked_vertices[marked_vertices_idx++] = start;
+	curr_vertex = start;
 
 	while(curr_vertex != dest) {
 
@@ -115,7 +193,7 @@ void dijkstra(struct a_graph *graph, int src, int dest) {
 		for (c = 0; c < v; c++) {
 
 			if (!is_marked(c, marked_vertices, marked_vertices_idx)) {
-				if (weight_table[wt_table_r][c] < min) {
+				if (weight_table[wt_table_r][c] < min && !(graph_bfs(graph, start, dest) )) {
 					min = weight_table[wt_table_r][c];
 					tmp_c = c;
 				}
@@ -140,7 +218,7 @@ void dijkstra(struct a_graph *graph, int src, int dest) {
 
 	}
 
-	printf("Shortest Path between %d and %d\n", src, dest);
+	printf("Shortest Path between %d and %d\n", start, dest);
 	for (i = shortest_path_vertices_idx-1; i >= 0; i--) {
 		printf("%d", shortest_path_vertices[i]);
 		if (i > 0) {
@@ -209,7 +287,7 @@ int main() {
     struct a_graph *graph;
     int start;
     int dest;
-    int aux;
+
     graph = calloc(1, sizeof(struct a_graph));
     init_graph(graph);
     printf("\nStarting point:");
@@ -218,8 +296,6 @@ int main() {
     scanf("%d", &dest);
     print_adj_matrix(graph);
     dijkstra(graph, start, dest);
-    aux=get_adj_matrix_value(graph, 0, 2);
-    printf("\naux=%d", aux);
     delete_graph(graph);
 
     return 0;
