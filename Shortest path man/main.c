@@ -15,9 +15,10 @@ struct a_list_node{
     struct a_list_node *next;
 };
 
-int get_adj_matrix_value(struct a_graph *graph, int row_index, int column_index) {
+int get_adj_matrix_value(struct a_graph *graph, int row_index, int column_index, int error) {
     int position;
 
+    printf("\nEROARE:%d", error);
     assert(row_index < graph->no_nodes);
     assert(column_index < graph->no_nodes);
     if (graph->init == 1){
@@ -85,7 +86,7 @@ int graph_bfs(struct a_graph *graph, int start_node, int dest_node){
     int connect;
     int i;
 
-    connect = get_adj_matrix_value(graph, start_node, dest_node);
+    connect = get_adj_matrix_value(graph, start_node, dest_node, 0);
 
     set_adj_matrix_value(graph, start_node, dest_node, 0);
     set_adj_matrix_value(graph, dest_node, start_node, 0);
@@ -102,7 +103,7 @@ int graph_bfs(struct a_graph *graph, int start_node, int dest_node){
         current_node = pop_end_list(head_queue);
         printf("%d,",current_node);
         for(i = 0; i < graph->no_nodes; i++){
-            aux = get_adj_matrix_value(graph, current_node, i);
+            aux = get_adj_matrix_value(graph, current_node, i, 0);
             if ( (aux != 0) && ( (visited[i]) == 0 )){
                 push_begining_list(head_queue, i);
                 visited[i] = 1;
@@ -153,7 +154,7 @@ void dijkstra(struct a_graph *graph, int start, int dest) {
 	memset(shortest_path_vertices, 0, v*sizeof(int) );
 	int shortest_path_vertices_idx = 0;
 
-
+    printf("\n tmp_c=%d", tmp_c);
 	int weight_table[v][v];
 	for (r = 0; r < v; r++) {
 		for (c = 0; c < v; c++) {
@@ -179,7 +180,9 @@ void dijkstra(struct a_graph *graph, int start, int dest) {
 
 			if (c != curr_vertex && !( is_marked(c, marked_vertices, marked_vertices_idx) ) ) {
 
-				edge_wt = get_adj_matrix_value(graph, curr_vertex, c);
+                printf("\ncurr_vertex=%d", curr_vertex);
+                printf("\n c=%d", c);
+				edge_wt = get_adj_matrix_value(graph, curr_vertex, c, 1);
 				dest_value = weight_table[wt_table_r - 1][c];
 				marked_value = weight_table[wt_table_r][curr_vertex];
 
@@ -192,10 +195,11 @@ void dijkstra(struct a_graph *graph, int start, int dest) {
 		min = INF;
 		for (c = 0; c < v; c++) {
 
-			if (!is_marked(c, marked_vertices, marked_vertices_idx)) {
-				if (weight_table[wt_table_r][c] < min && !(graph_bfs(graph, start, dest) )) {
+			if (!is_marked(c, marked_vertices, marked_vertices_idx) ) {
+				if (weight_table[wt_table_r][c] < min && graph_bfs(graph, start, dest) ) {
 					min = weight_table[wt_table_r][c];
 					tmp_c = c;
+					printf("\n tmp_c=%d", tmp_c);
 				}
 			}
 
@@ -269,7 +273,7 @@ void print_adj_matrix(struct a_graph *graph){
         printf("=== Printing adj_matrix ===\n");
         for (iterator_rows = 0; iterator_rows < graph->no_nodes; iterator_rows++ ){
             for (iterator_columns = 0; iterator_columns < graph->no_nodes; iterator_columns++ ){
-                aux = get_adj_matrix_value(graph, iterator_rows, iterator_columns);
+                aux = get_adj_matrix_value(graph, iterator_rows, iterator_columns, 0);
                 printf(" %d ", aux);
             }
             printf("\n");
@@ -287,6 +291,8 @@ int main() {
     struct a_graph *graph;
     int start;
     int dest;
+    int aux;
+    int i;
 
     graph = calloc(1, sizeof(struct a_graph));
     init_graph(graph);
@@ -296,6 +302,11 @@ int main() {
     scanf("%d", &dest);
     print_adj_matrix(graph);
     dijkstra(graph, start, dest);
+/*    for(i = 0; i < graph->no_nodes; i++){
+        aux=graph_bfs(graph, i, dest);
+        printf("\n aux=%d", aux);
+    }
+    */
     delete_graph(graph);
 
     return 0;
