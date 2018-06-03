@@ -15,10 +15,9 @@ struct a_list_node{
     struct a_list_node *next;
 };
 
-int get_adj_matrix_value(struct a_graph *graph, int row_index, int column_index, int error) {
+int get_adj_matrix_value(struct a_graph *graph, int row_index, int column_index) {
     int position;
 
-    printf("\nEROARE:%d", error);
     assert(row_index < graph->no_nodes);
     assert(column_index < graph->no_nodes);
     if (graph->init == 1){
@@ -85,8 +84,9 @@ int graph_bfs(struct a_graph *graph, int start_node, int dest_node){
     int current_node;
     int connect;
     int i;
+    int j;
 
-    connect = get_adj_matrix_value(graph, start_node, dest_node, 0);
+    connect = get_adj_matrix_value(graph, start_node, dest_node);
 
     set_adj_matrix_value(graph, start_node, dest_node, 0);
     set_adj_matrix_value(graph, dest_node, start_node, 0);
@@ -98,27 +98,22 @@ int graph_bfs(struct a_graph *graph, int start_node, int dest_node){
     push_begining_list(head_queue, start_node);
     visited[start_node] = 1;
 
-    printf("\nBFS traversal: ");
     while (head_queue->next != NULL){
         current_node = pop_end_list(head_queue);
-        printf("%d,",current_node);
         for(i = 0; i < graph->no_nodes; i++){
-            aux = get_adj_matrix_value(graph, current_node, i, 0);
+            aux = get_adj_matrix_value(graph, current_node, i);
             if ( (aux != 0) && ( (visited[i]) == 0 )){
                 push_begining_list(head_queue, i);
                 visited[i] = 1;
             }
         }
     }
-
-    for(i = 0; i < graph->no_nodes; i++){
-        if( visited[i] == 0){
-            set_adj_matrix_value(graph, start_node, dest_node, connect);
-            set_adj_matrix_value(graph, dest_node, start_node, connect);
-            free(head_queue);
-            free(visited);
-            return 0;
-        }
+    if( visited[dest_node] == 0 && visited[start_node] == 0 ){
+        set_adj_matrix_value(graph, start_node, dest_node, connect);
+        set_adj_matrix_value(graph, dest_node, start_node, connect);
+        free(head_queue);
+        free(visited);
+        return 0;
     }
     set_adj_matrix_value(graph, start_node, dest_node, connect);
     set_adj_matrix_value(graph, dest_node, start_node, connect);
@@ -129,12 +124,11 @@ int graph_bfs(struct a_graph *graph, int start_node, int dest_node){
 
 void dijkstra(struct a_graph *graph, int start, int dest) {
 
-    printf("asd");
     int v;
 	int i;
     int r;
     int c;
-    int tmp_c;
+    int tmp_c=start;
     int min;
     int curr_vertex;
     int edge_wt;
@@ -154,7 +148,6 @@ void dijkstra(struct a_graph *graph, int start, int dest) {
 	memset(shortest_path_vertices, 0, v*sizeof(int) );
 	int shortest_path_vertices_idx = 0;
 
-    printf("\n tmp_c=%d", tmp_c);
 	int weight_table[v][v];
 	for (r = 0; r < v; r++) {
 		for (c = 0; c < v; c++) {
@@ -179,10 +172,7 @@ void dijkstra(struct a_graph *graph, int start, int dest) {
 		for (c = 0; c < v; c++) {
 
 			if (c != curr_vertex && !( is_marked(c, marked_vertices, marked_vertices_idx) ) ) {
-
-                printf("\ncurr_vertex=%d", curr_vertex);
-                printf("\n c=%d", c);
-				edge_wt = get_adj_matrix_value(graph, curr_vertex, c, 1);
+				edge_wt = get_adj_matrix_value(graph, curr_vertex, c);
 				dest_value = weight_table[wt_table_r - 1][c];
 				marked_value = weight_table[wt_table_r][curr_vertex];
 
@@ -199,7 +189,6 @@ void dijkstra(struct a_graph *graph, int start, int dest) {
 				if (weight_table[wt_table_r][c] < min && graph_bfs(graph, start, dest) ) {
 					min = weight_table[wt_table_r][c];
 					tmp_c = c;
-					printf("\n tmp_c=%d", tmp_c);
 				}
 			}
 
@@ -273,7 +262,7 @@ void print_adj_matrix(struct a_graph *graph){
         printf("=== Printing adj_matrix ===\n");
         for (iterator_rows = 0; iterator_rows < graph->no_nodes; iterator_rows++ ){
             for (iterator_columns = 0; iterator_columns < graph->no_nodes; iterator_columns++ ){
-                aux = get_adj_matrix_value(graph, iterator_rows, iterator_columns, 0);
+                aux = get_adj_matrix_value(graph, iterator_rows, iterator_columns);
                 printf(" %d ", aux);
             }
             printf("\n");
