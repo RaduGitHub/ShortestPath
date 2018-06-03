@@ -90,7 +90,6 @@ void dijkstra(struct a_graph *graph, int src, int dest) {
 	marked_vertices[marked_vertices_idx++] = src;
 	curr_vertex = src;
 
-    printf("asd");
 	while(curr_vertex != dest) {
 
 
@@ -100,7 +99,7 @@ void dijkstra(struct a_graph *graph, int src, int dest) {
 		}
 		for (c = 0; c < v; c++) {
 
-			if (c != curr_vertex && !is_marked(c, marked_vertices, marked_vertices_idx)) {
+			if (c != curr_vertex && !( is_marked(c, marked_vertices, marked_vertices_idx) ) ) {
 
 				edge_wt = get_adj_matrix_value(graph, curr_vertex, c);
 				dest_value = weight_table[wt_table_r - 1][c];
@@ -109,7 +108,6 @@ void dijkstra(struct a_graph *graph, int src, int dest) {
 				min = find_min(dest_value, marked_value + edge_wt);
 
 				weight_table[wt_table_r][c] = min;
-                printf("asd");
 			}
 
 		}
@@ -120,7 +118,6 @@ void dijkstra(struct a_graph *graph, int src, int dest) {
 				if (weight_table[wt_table_r][c] < min) {
 					min = weight_table[wt_table_r][c];
 					tmp_c = c;
-					printf("\nasd");
 				}
 			}
 
@@ -128,10 +125,8 @@ void dijkstra(struct a_graph *graph, int src, int dest) {
 		marked_vertices[marked_vertices_idx++] = tmp_c;
 		curr_vertex = tmp_c;
 		wt_table_r++;
-		printf("\nmarked vertices idx  %d", marked_vertices_idx);
 
 	}
-	printf("asd");
 	c = dest;
 	shortest_path_vertices[shortest_path_vertices_idx++] = c;
 	marked_value = weight_table[wt_table_r - 1][dest];
@@ -145,7 +140,6 @@ void dijkstra(struct a_graph *graph, int src, int dest) {
 
 	}
 
-    printf("asd");
 	printf("Shortest Path between %d and %d\n", src, dest);
 	for (i = shortest_path_vertices_idx-1; i >= 0; i--) {
 		printf("%d", shortest_path_vertices[i]);
@@ -215,16 +209,17 @@ int main() {
     struct a_graph *graph;
     int start;
     int dest;
-
+    int aux;
     graph = calloc(1, sizeof(struct a_graph));
     init_graph(graph);
     printf("\nStarting point:");
     scanf("%d", &start);
     printf("\nDestination point:");
-    scanf("%d", &start);
+    scanf("%d", &dest);
     print_adj_matrix(graph);
     dijkstra(graph, start, dest);
-
+    aux=get_adj_matrix_value(graph, 0, 2);
+    printf("\naux=%d", aux);
     delete_graph(graph);
 
     return 0;
