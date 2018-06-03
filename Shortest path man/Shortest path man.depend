@@ -1,7 +1,43 @@
 # depslib dependency file v1.0
-1528055520 source:c:\users\radu\documents\github\shortestpath\shortest path man\main.c
+1528070764 source:c:\users\radu\documents\github\shortestpath\shortest path man\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<assert.h>
+	"Dijkstra.h"
+	"Helping_functions.h"
+	"Floyd_warshall.h"
+
+1528070588 c:\users\radu\documents\github\shortestpath\shortest path man\dijkstra.h
+
+1528070588 source:c:\users\radu\documents\github\shortestpath\shortest path man\dijkstra_tools.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	"Dijkstra.h"
+	"Helping_functions.h"
+	"Floyd_warshall.h"
+
+1528064215 c:\users\radu\documents\github\shortestpath\shortest path man\helping_functions.h
+
+1528070588 source:c:\users\radu\documents\github\shortestpath\shortest path man\helping_functions.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	"Dijkstra.h"
+	"Helping_functions.h"
+	"Floyd_warshall.h"
+
+1528070662 c:\users\radu\documents\github\shortestpath\shortest path man\floyd_warshall.h
+
+1528070694 source:c:\users\radu\documents\github\shortestpath\shortest path man\floyd_warshall.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	"Dijkstra.h"
+	"Helping_functions.h"
+	"Floyd_warshall.h"
 

@@ -31,6 +31,18 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Dijkstra.h" />
+		<Unit filename="Dijkstra_tools.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Floyd_Warshall.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Floyd_warshall.h" />
+		<Unit filename="Helping_functions.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Helping_functions.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
