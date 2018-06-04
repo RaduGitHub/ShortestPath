@@ -65,6 +65,5 @@ void floyd_marshall (struct a_graph *graph,int start,int dest){
             }
         }
     }
-
     printf("Lenght of the path between %d and %d using Floyd-Warshall: %d\n", start, dest, init_distance[start][dest]);
 }

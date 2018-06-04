@@ -41,3 +41,36 @@
 	"Helping_functions.h"
 	"Floyd_warshall.h"
 
+1528107549 source:c:\users\radu\documents\github\shortestpath\shortest lenght\dijkstra_tools.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	"Dijkstra.h"
+	"Helping_functions.h"
+	"Floyd_warshall.h"
+
+1528070588 c:\users\radu\documents\github\shortestpath\shortest lenght\dijkstra.h
+
+1528064215 c:\users\radu\documents\github\shortestpath\shortest lenght\helping_functions.h
+
+1528070662 c:\users\radu\documents\github\shortestpath\shortest lenght\floyd_warshall.h
+
+1528070588 source:c:\users\radu\documents\github\shortestpath\shortest lenght\helping_functions.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	"Dijkstra.h"
+	"Helping_functions.h"
+	"Floyd_warshall.h"
+
+1528108240 source:c:\users\radu\documents\github\shortestpath\shortest lenght\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	"Dijkstra.h"
+	"Helping_functions.h"
+	"Floyd_warshall.h"
+
