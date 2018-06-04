@@ -30,6 +30,7 @@ int main() {
     scanf ("%d", &variable);
     assert(variable > 0);
     assert(variable < 3);
+
     if (variable == 1){
         dijkstra(graph, start, dest);
     } else {
