@@ -67,10 +67,10 @@ void floyd_marshall (struct a_graph *graph,int start,int dest){
                 if (i == j){
                     continue;
                 }
-                if (init_distance[i][j] > init_distance[i][k] + init_distance[k][j] && graph_bfs(graph, start, dest)){
+                if (init_distance[i][j] > init_distance[i][k] + init_distance[k][j] && graph_bfs(graph, i, j)){
                     distance_k[i][j] = init_distance[i][k] + init_distance[k][j];
                     set_adj_matrix_value(graph, i, j, distance_k[i][j]);
-                    sequence_k[i][j] = k + 1;
+                    sequence_k[i][j] = k ;
                 } else {
                     distance_k[i][j] = init_distance[i][j];
                     set_adj_matrix_value(graph, i, j, init_distance[i][j]);
@@ -81,25 +81,10 @@ void floyd_marshall (struct a_graph *graph,int start,int dest){
         for (i = 0; i < graph->no_nodes; i++){
             for (j = 0; j < graph->no_nodes; j++){
                 init_distance[i][j] = distance_k[i][j];
-                init_sequence[i][j] = distance_k[i][j];
+                init_sequence[i][j] = sequence_k[i][j];
             }
         }
     }
 
-    int vector[graph->no_nodes];
-    vector[0] = start;
-    vector[1] = dest;
-    k = 2;
-    i = start;
-    j = dest;
-    while(dest != init_sequence[i][j]){
-        aux = vector[k-1];
-        vector[k-1] = init_sequence[i][j];
-        vector[k] = aux;
-        i = vector[k-1];
-        k++;
-    }
-    for (i = 0; i < graph->no_nodes; i++)
-        printf("%d -->", vector[i]);
-    printf("\n Shortest path:%d", init_distance[start][dest]);
+    printf("Lenght of the path between %d and %d using Floyd-Warshall: %d\n", start, dest, init_distance[start][dest]);
 }

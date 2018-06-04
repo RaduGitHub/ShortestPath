@@ -11,6 +11,7 @@ int main() {
     struct a_graph *graph;
     int start;
     int dest;
+    int variable;
 
     graph = calloc(1, sizeof(struct a_graph));
     init_graph(graph);
@@ -19,13 +20,21 @@ int main() {
     scanf("%d", &start);
     printf("\nDestination point:");
     scanf("%d", &dest);
-
+    assert ( start >= 0 );
+    assert ( start < graph->no_nodes );
+    assert ( dest >= 0 );
+    assert ( dest < graph->no_nodes );
     print_adj_matrix(graph);
 
-  //  dijkstra(graph, start, dest);
-
-    floyd_marshall(graph, start, dest);
-
+    printf ("varialbe=");
+    scanf ("%d", &variable);
+    assert(variable > 0);
+    assert(variable < 3);
+    if (variable == 1){
+        dijkstra(graph, start, dest);
+    } else {
+        floyd_marshall(graph, start, dest);
+    }
     delete_graph(graph);
 
     return 0;
