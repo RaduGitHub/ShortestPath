@@ -41,7 +41,7 @@
 	"Helping_functions.h"
 	"Floyd_warshall.h"
 
-1528107549 source:c:\users\radu\documents\github\shortestpath\shortest lenght\dijkstra_tools.c
+1528233171 source:c:\users\radu\documents\github\shortestpath\shortest lenght\dijkstra_tools.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -50,13 +50,13 @@
 	"Helping_functions.h"
 	"Floyd_warshall.h"
 
-1528070588 c:\users\radu\documents\github\shortestpath\shortest lenght\dijkstra.h
+1528232776 c:\users\radu\documents\github\shortestpath\shortest lenght\dijkstra.h
 
-1528064215 c:\users\radu\documents\github\shortestpath\shortest lenght\helping_functions.h
+1528233524 c:\users\radu\documents\github\shortestpath\shortest lenght\helping_functions.h
 
-1528070662 c:\users\radu\documents\github\shortestpath\shortest lenght\floyd_warshall.h
+1528232776 c:\users\radu\documents\github\shortestpath\shortest lenght\floyd_warshall.h
 
-1528070588 source:c:\users\radu\documents\github\shortestpath\shortest lenght\helping_functions.c
+1528233793 source:c:\users\radu\documents\github\shortestpath\shortest lenght\helping_functions.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -65,7 +65,7 @@
 	"Helping_functions.h"
 	"Floyd_warshall.h"
 
-1528108240 source:c:\users\radu\documents\github\shortestpath\shortest lenght\main.c
+1528230092 source:c:\users\radu\documents\github\shortestpath\shortest lenght\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -74,7 +74,7 @@
 	"Helping_functions.h"
 	"Floyd_warshall.h"
 
-1528193579 source:d:\becheru\shortestpath\shortest lenght\floyd_warshall.c
+1528233171 source:d:\becheru\shortestpath\shortest lenght\floyd_warshall.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -83,13 +83,13 @@
 	"Helping_functions.h"
 	"Floyd_warshall.h"
 
-1528070588 d:\becheru\shortestpath\shortest lenght\dijkstra.h
+1528232776 d:\becheru\shortestpath\shortest lenght\dijkstra.h
 
-1528064215 d:\becheru\shortestpath\shortest lenght\helping_functions.h
+1528233524 d:\becheru\shortestpath\shortest lenght\helping_functions.h
 
-1528070662 d:\becheru\shortestpath\shortest lenght\floyd_warshall.h
+1528232776 d:\becheru\shortestpath\shortest lenght\floyd_warshall.h
 
-1528191592 source:d:\becheru\shortestpath\shortest lenght\helping_functions.c
+1528233171 source:d:\becheru\shortestpath\shortest lenght\helping_functions.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -98,7 +98,7 @@
 	"Helping_functions.h"
 	"Floyd_warshall.h"
 
-1528191565 source:d:\becheru\shortestpath\shortest lenght\main.c
+1528230092 source:d:\becheru\shortestpath\shortest lenght\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -107,7 +107,16 @@
 	"Helping_functions.h"
 	"Floyd_warshall.h"
 
-1528192003 source:d:\becheru\shortestpath\shortest lenght\dijkstra_tools.c
+1528233171 source:d:\becheru\shortestpath\shortest lenght\dijkstra_tools.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	"Dijkstra.h"
+	"Helping_functions.h"
+	"Floyd_warshall.h"
+
+1528233171 source:c:\users\radu\documents\github\shortestpath\shortest lenght\floyd_warshall.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
