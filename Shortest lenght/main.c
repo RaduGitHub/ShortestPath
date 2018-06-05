@@ -24,13 +24,11 @@ int main() {
     assert ( start < graph->no_nodes );
     assert ( dest >= 0 );
     assert ( dest < graph->no_nodes );
-    print_adj_matrix(graph);
-
-    printf ("varialbe=");
+    
+    printf ("Press 1 for Dijkstra and 2 for Floyd Warshall:");
     scanf ("%d", &variable);
     assert(variable > 0);
     assert(variable < 3);
-
     if (variable == 1){
         dijkstra(graph, start, dest);
     } else {

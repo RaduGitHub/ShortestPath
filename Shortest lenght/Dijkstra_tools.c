@@ -116,7 +116,13 @@ void dijkstra(struct a_graph *graph, int start, int dest) {
 
 	}
 
-
+	printf("Shortest Path between %d and %d\n", start, dest);
+	for (i = v-1; i >= 0; i--) {
+		printf("%d", shortest_path_vertices[i]);
+		if (i > 0) {
+			printf(" --> ");
+		}
+	}
 	printf("\n");
 	printf("Lenght of the path between %d and %d using Dijkstra: %d\n", start, dest, weight_table[wt_table_r-1][dest]);
 
